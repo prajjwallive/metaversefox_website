@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"> </script>
+    <script type="module"
+        src="https://cdn.nft-generator.art/js-sdk/v1.2.0/nft-art-generator-sdk/nft-art-generator-sdk.esm.js"></script>
+    <script nomodule
+        src="https://cdn.nft-generator.art/js-sdk/v1.2.0/nft-art-generator-sdk/nft-art-generator-sdk.js"></script>
+    <meta name="nft-art-contract-abi"
+        content="W3sidHlwZSI6ImNvbnN0cnVjdG9yIiwiaW5wdXRzIjpbeyJuYW1lIjoiX3VyaSIsInR5cGUiOiJzdHJpbmciLCJpbnRlcm5hbFR5cGUiOiJzdHJpbmcifSx7Im5hbWUiOiJfbmFtZSIsInR5cGUiOiJzdHJpbmciLCJpbnRlcm5hbFR5cGUiOiJzdHJpbmcifSx7Im5hbWUiOiJfc3ltYm9sIiwidHlwZSI6InN0cmluZyIsImludGVybmFsVHlwZSI6InN0cmluZyJ9LHsibmFtZSI6Il90b3RhbFN1cHBseSIsInR5cGUiOiJ1aW50MzIiLCJpbnRlcm5hbFR5cGUiOiJ1aW50MzIifSx7Im5hbWUiOiJfY29zdCIsInR5cGUiOiJ1aW50MjU2IiwiaW50ZXJuYWxUeXBlIjoidWludDI1NiJ9LHsibmFtZSI6Il9vcGVuIiwidHlwZSI6ImJvb2wiLCJpbnRlcm5hbFR5cGUiOiJib29sIn1dLCJzdGF0ZU11dGFiaWxpdHkiOiJub25wYXlhYmxlIn0seyJuYW1lIjoiQXBwcm92YWwiLCJ0eXBlIjoiZXZlbnQiLCJpbnB1dHMiOlt7Im5hbWUiOiJvd25lciIsInR5cGUiOiJhZGRyZXNzIiwiaW5kZXhlZCI6dHJ1ZSwiaW50ZXJuYWxUeXBlIjoiYWRkcmVzcyJ9LHsibmFtZSI6ImFwcHJvdmVkIiwidHlwZSI6ImFkZHJlc3MiLCJpbmRleGVkIjp0cnVlLCJpbnRlcm5hbFR5cGUiOiJhZGRyZXNzIn0seyJuYW1lIjoidG9rZW5JZCIsInR5cGUiOiJ1aW50MjU2IiwiaW5kZXhlZCI6dHJ1ZSwiaW50ZXJuYWxUeXBlIjoidWludDI1NiJ9XSwiYW5vbnltb3VzIjpmYWxzZX0seyJuYW1lIjoiQXBwcm92YWxGb3JBbGwiLCJ0eXBlIjoiZXZlbnQiLCJpbnB1dHMiOlt7Im5hbWUiOiJvd25lciIsInR5cGUiOiJhZGRyZXNzIiwiaW5kZXhlZCI6dHJ1ZSwiaW50ZXJuYWxUeXBlIjoiYWRkcmVzcyJ9LHsibmFtZSI6Im9wZXJhdG9yIiwidHlwZSI6ImFkZHJlc3MiLCJpbmRleGVkIjp0cnVlLCJpbnRlcm5hbFR5cGUiOiJhZGRyZXNzIn0seyJuYW1lIjoiYXBwcm92ZWQiLCJ0eXBlIjoiYm9vbCIsImluZGV4ZWQiOmZhbHNlLCJpbnRlcm5hbFR5cGUiOiJib29sIn1dLCJhbm9ueW1vdXMiOmZhbHNlfSx7Im5hbWUiOiJPd25lcnNoaXBUcmFuc2ZlcnJlZCIsInR5cGUiOiJldmVudCIsImlucHV0cyI6W3sibmFtZSI6InByZXZpb3VzT3duZXIiLCJ0eXBlIjoiYWRkcmVzcyIsImluZGV4ZWQiOnRydWUsImludGVybmFsVHlwZSI6ImFkZHJlc3MifSx7Im5hbWUiOiJuZXdPd25lciIsInR5cGUiOiJhZGRyZXNzIiwiaW5kZXhlZCI6dHJ1ZSwiaW50ZXJuYWxUeXBlIjoiYWRkcmVzcyJ9XSwiYW5vbnltb3VzIjpmYWxzZX0seyJuYW1lIjoiVHJhbnNmZXIiLCJ0eXBlIjoiZXZlbnQiLCJpbnB1dHMiOlt7Im5hbWUiOiJmcm9tIiwidHlwZSI6ImFkZHJlc3MiLCJpbmRleGVkIjp0cnVlLCJpbnRlcm5hbFR5cGUiOiJhZGRyZXNzIn0seyJuYW1lIjoidG8iLCJ0eXBlIjoiYWRkcmVzcyIsImluZGV4ZWQiOnRydWUsImludGVybmFsVHlwZSI6ImFkZHJlc3MifSx7Im5hbWUiOiJ0b2tlbklkIiwidHlwZSI6InVpbnQyNTYiLCJpbmRleGVkIjp0cnVlLCJpbnRlcm5hbFR5cGUiOiJ1aW50MjU2In1dLCJhbm9ueW1vdXMiOmZhbHNlfSx7Im5hbWUiOiJhaXJkcm9wIiwidHlwZSI6ImZ1bmN0aW9uIiwiaW5wdXRzIjpbeyJuYW1lIjoidG8iLCJ0eXBlIjoiYWRkcmVzc1tdIiwiaW50ZXJuYWxUeXBlIjoiYWRkcmVzc1tdIn1dLCJvdXRwdXRzIjpbXSwic3RhdGVNdXRhYmlsaXR5Ijoibm9ucGF5YWJsZSJ9LHsibmFtZSI6ImFwcHJvdmUiLCJ0eXBlIjoiZnVuY3Rpb24iLCJpbnB1dHMiOlt7Im5hbWUiOiJ0byIsInR5cGUiOiJhZGRyZXNzIiwiaW50ZXJuYWxUeXBlIjoiYWRkcmVzcyJ9LHsibmFtZSI6InRva2VuSWQiLCJ0eXBlIjoidWludDI1NiIsImludGVybmFsVHlwZSI6InVpbnQyNTYifV0sIm91dHB1dHMiOltdLCJzdGF0ZU11dGFiaWxpdHkiOiJub25wYXlhYmxlIn0seyJuYW1lIjoiYmFsYW5jZU9mIiwidHlwZSI6ImZ1bmN0aW9uIiwiaW5wdXRzIjpbeyJuYW1lIjoib3duZXIiLCJ0eXBlIjoiYWRkcmVzcyIsImludGVybmFsVHlwZSI6ImFkZHJlc3MifV0sIm91dHB1dHMiOlt7Im5hbWUiOiIiLCJ0eXBlIjoidWludDI1NiIsImludGVybmFsVHlwZSI6InVpbnQyNTYifV0sInN0YXRlTXV0YWJpbGl0eSI6InZpZXcifSx7Im5hbWUiOiJjb3N0IiwidHlwZSI6ImZ1bmN0aW9uIiwiaW5wdXRzIjpbXSwib3V0cHV0cyI6W3sibmFtZSI6IiIsInR5cGUiOiJ1aW50MjU2IiwiaW50ZXJuYWxUeXBlIjoidWludDI1NiJ9XSwic3RhdGVNdXRhYmlsaXR5IjoidmlldyJ9LHsibmFtZSI6ImdldEFwcHJvdmVkIiwidHlwZSI6ImZ1bmN0aW9uIiwiaW5wdXRzIjpbeyJuYW1lIjoidG9rZW5JZCIsInR5cGUiOiJ1aW50MjU2IiwiaW50ZXJuYWxUeXBlIjoidWludDI1NiJ9XSwib3V0cHV0cyI6W3sibmFtZSI6IiIsInR5cGUiOiJhZGRyZXNzIiwiaW50ZXJuYWxUeXBlIjoiYWRkcmVzcyJ9XSwic3RhdGVNdXRhYmlsaXR5IjoidmlldyJ9LHsibmFtZSI6ImlzQXBwcm92ZWRGb3JBbGwiLCJ0eXBlIjoiZnVuY3Rpb24iLCJpbnB1dHMiOlt7Im5hbWUiOiJvd25lciIsInR5cGUiOiJhZGRyZXNzIiwiaW50ZXJuYWxUeXBlIjoiYWRkcmVzcyJ9LHsibmFtZSI6Im9wZXJhdG9yIiwidHlwZSI6ImFkZHJlc3MiLCJpbnRlcm5hbFR5cGUiOiJhZGRyZXNzIn1dLCJvdXRwdXRzIjpbeyJuYW1lIjoiIiwidHlwZSI6ImJvb2wiLCJpbnRlcm5hbFR5cGUiOiJib29sIn1dLCJzdGF0ZU11dGFiaWxpdHkiOiJ2aWV3In0seyJuYW1lIjoibWF4UGVyTWludCIsInR5cGUiOiJmdW5jdGlvbiIsImlucHV0cyI6W10sIm91dHB1dHMiOlt7Im5hbWUiOiIiLCJ0eXBlIjoidWludDMyIiwiaW50ZXJuYWxUeXBlIjoidWludDMyIn1dLCJzdGF0ZU11dGFiaWxpdHkiOiJ2aWV3In0seyJuYW1lIjoibWF4UGVyV2FsbGV0IiwidHlwZSI6ImZ1bmN0aW9uIiwiaW5wdXRzIjpbXSwib3V0cHV0cyI6W3sibmFtZSI6IiIsInR5cGUiOiJ1aW50MzIiLCJpbnRlcm5hbFR5cGUiOiJ1aW50MzIifV0sInN0YXRlTXV0YWJpbGl0eSI6InZpZXcifSx7Im5hbWUiOiJtaW50IiwidHlwZSI6ImZ1bmN0aW9uIiwiaW5wdXRzIjpbeyJuYW1lIjoiY291bnQiLCJ0eXBlIjoidWludDMyIiwiaW50ZXJuYWxUeXBlIjoidWludDMyIn1dLCJvdXRwdXRzIjpbXSwic3RhdGVNdXRhYmlsaXR5IjoicGF5YWJsZSJ9LHsibmFtZSI6Im5hbWUiLCJ0eXBlIjoiZnVuY3Rpb24iLCJpbnB1dHMiOltdLCJvdXRwdXRzIjpbeyJuYW1lIjoiIiwidHlwZSI6InN0cmluZyIsImludGVybmFsVHlwZSI6InN0cmluZyJ9XSwic3RhdGVNdXRhYmlsaXR5IjoidmlldyJ9LHsibmFtZSI6Im9wZW4iLCJ0eXBlIjoiZnVuY3Rpb24iLCJpbnB1dHMiOltdLCJvdXRwdXRzIjpbeyJuYW1lIjoiIiwidHlwZSI6ImJvb2wiLCJpbnRlcm5hbFR5cGUiOiJib29sIn1dLCJzdGF0ZU11dGFiaWxpdHkiOiJ2aWV3In0seyJuYW1lIjoib3duZXIiLCJ0eXBlIjoiZnVuY3Rpb24iLCJpbnB1dHMiOltdLCJvdXRwdXRzIjpbeyJuYW1lIjoiIiwidHlwZSI6ImFkZHJlc3MiLCJpbnRlcm5hbFR5cGUiOiJhZGRyZXNzIn1dLCJzdGF0ZU11dGFiaWxpdHkiOiJ2aWV3In0seyJuYW1lIjoib3duZXJPZiIsInR5cGUiOiJmdW5jdGlvbiIsImlucHV0cyI6W3sibmFtZSI6InRva2VuSWQiLCJ0eXBlIjoidWludDI1NiIsImludGVybmFsVHlwZSI6InVpbnQyNTYifV0sIm91dHB1dHMiOlt7Im5hbWUiOiIiLCJ0eXBlIjoiYWRkcmVzcyIsImludGVybmFsVHlwZSI6ImFkZHJlc3MifV0sInN0YXRlTXV0YWJpbGl0eSI6InZpZXcifSx7Im5hbWUiOiJyZW5vdW5jZU93bmVyc2hpcCIsInR5cGUiOiJmdW5jdGlvbiIsImlucHV0cyI6W10sIm91dHB1dHMiOltdLCJzdGF0ZU11dGFiaWxpdHkiOiJub25wYXlhYmxlIn0seyJuYW1lIjoic2FmZVRyYW5zZmVyRnJvbSIsInR5cGUiOiJmdW5jdGlvbiIsImlucHV0cyI6W3sibmFtZSI6ImZyb20iLCJ0eXBlIjoiYWRkcmVzcyIsImludGVybmFsVHlwZSI6ImFkZHJlc3MifSx7Im5hbWUiOiJ0byIsInR5cGUiOiJhZGRyZXNzIiwiaW50ZXJuYWxUeXBlIjoiYWRkcmVzcyJ9LHsibmFtZSI6InRva2VuSWQiLCJ0eXBlIjoidWludDI1NiIsImludGVybmFsVHlwZSI6InVpbnQyNTYifV0sIm91dHB1dHMiOltdLCJzdGF0ZU11dGFiaWxpdHkiOiJub25wYXlhYmxlIn0seyJuYW1lIjoic2FmZVRyYW5zZmVyRnJvbSIsInR5cGUiOiJmdW5jdGlvbiIsImlucHV0cyI6W3sibmFtZSI6ImZyb20iLCJ0eXBlIjoiYWRkcmVzcyIsImludGVybmFsVHlwZSI6ImFkZHJlc3MifSx7Im5hbWUiOiJ0byIsInR5cGUiOiJhZGRyZXNzIiwiaW50ZXJuYWxUeXBlIjoiYWRkcmVzcyJ9LHsibmFtZSI6InRva2VuSWQiLCJ0eXBlIjoidWludDI1NiIsImludGVybmFsVHlwZSI6InVpbnQyNTYifSx7Im5hbWUiOiJfZGF0YSIsInR5cGUiOiJieXRlcyIsImludGVybmFsVHlwZSI6ImJ5dGVzIn1dLCJvdXRwdXRzIjpbXSwic3RhdGVNdXRhYmlsaXR5Ijoibm9ucGF5YWJsZSJ9LHsibmFtZSI6InNldEFwcHJvdmFsRm9yQWxsIiwidHlwZSI6ImZ1bmN0aW9uIiwiaW5wdXRzIjpbeyJuYW1lIjoib3BlcmF0b3IiLCJ0eXBlIjoiYWRkcmVzcyIsImludGVybmFsVHlwZSI6ImFkZHJlc3MifSx7Im5hbWUiOiJhcHByb3ZlZCIsInR5cGUiOiJib29sIiwiaW50ZXJuYWxUeXBlIjoiYm9vbCJ9XSwib3V0cHV0cyI6W10sInN0YXRlTXV0YWJpbGl0eSI6Im5vbnBheWFibGUifSx7Im5hbWUiOiJzZXRDb21taXNzaW9uIiwidHlwZSI6ImZ1bmN0aW9uIiwiaW5wdXRzIjpbeyJuYW1lIjoiX2NvbW1pc2lvbiIsInR5cGUiOiJ1aW50MzIiLCJpbnRlcm5hbFR5cGUiOiJ1aW50MzIifV0sIm91dHB1dHMiOltdLCJzdGF0ZU11dGFiaWxpdHkiOiJub25wYXlhYmxlIn0seyJuYW1lIjoic2V0Q29zdCIsInR5cGUiOiJmdW5jdGlvbiIsImlucHV0cyI6W3sibmFtZSI6Il9jb3N0IiwidHlwZSI6InVpbnQyNTYiLCJpbnRlcm5hbFR5cGUiOiJ1aW50MjU2In1dLCJvdXRwdXRzIjpbXSwic3RhdGVNdXRhYmlsaXR5Ijoibm9ucGF5YWJsZSJ9LHsibmFtZSI6InNldE1heFBlck1pbnQiLCJ0eXBlIjoiZnVuY3Rpb24iLCJpbnB1dHMiOlt7Im5hbWUiOiJfbWF4IiwidHlwZSI6InVpbnQzMiIsImludGVybmFsVHlwZSI6InVpbnQzMiJ9XSwib3V0cHV0cyI6W10sInN0YXRlTXV0YWJpbGl0eSI6Im5vbnBheWFibGUifSx7Im5hbWUiOiJzZXRNYXhQZXJXYWxsZXQiLCJ0eXBlIjoiZnVuY3Rpb24iLCJpbnB1dHMiOlt7Im5hbWUiOiJfbWF4IiwidHlwZSI6InVpbnQzMiIsImludGVybmFsVHlwZSI6InVpbnQzMiJ9XSwib3V0cHV0cyI6W10sInN0YXRlTXV0YWJpbGl0eSI6Im5vbnBheWFibGUifSx7Im5hbWUiOiJzZXRPcGVuIiwidHlwZSI6ImZ1bmN0aW9uIiwiaW5wdXRzIjpbeyJuYW1lIjoiX29wZW4iLCJ0eXBlIjoiYm9vbCIsImludGVybmFsVHlwZSI6ImJvb2wifV0sIm91dHB1dHMiOltdLCJzdGF0ZU11dGFiaWxpdHkiOiJub25wYXlhYmxlIn0seyJuYW1lIjoic3VwcGx5IiwidHlwZSI6ImZ1bmN0aW9uIiwiaW5wdXRzIjpbXSwib3V0cHV0cyI6W3sibmFtZSI6IiIsInR5cGUiOiJ1aW50MzIiLCJpbnRlcm5hbFR5cGUiOiJ1aW50MzIifV0sInN0YXRlTXV0YWJpbGl0eSI6InZpZXcifSx7Im5hbWUiOiJzdXBwb3J0c0ludGVyZmFjZSIsInR5cGUiOiJmdW5jdGlvbiIsImlucHV0cyI6W3sibmFtZSI6ImludGVyZmFjZUlkIiwidHlwZSI6ImJ5dGVzNCIsImludGVybmFsVHlwZSI6ImJ5dGVzNCJ9XSwib3V0cHV0cyI6W3sibmFtZSI6IiIsInR5cGUiOiJib29sIiwiaW50ZXJuYWxUeXBlIjoiYm9vbCJ9XSwic3RhdGVNdXRhYmlsaXR5IjoidmlldyJ9LHsibmFtZSI6InN5bWJvbCIsInR5cGUiOiJmdW5jdGlvbiIsImlucHV0cyI6W10sIm91dHB1dHMiOlt7Im5hbWUiOiIiLCJ0eXBlIjoic3RyaW5nIiwiaW50ZXJuYWxUeXBlIjoic3RyaW5nIn1dLCJzdGF0ZU11dGFiaWxpdHkiOiJ2aWV3In0seyJuYW1lIjoidG9rZW5VUkkiLCJ0eXBlIjoiZnVuY3Rpb24iLCJpbnB1dHMiOlt7Im5hbWUiOiJfdG9rZW5JZCIsInR5cGUiOiJ1aW50MjU2IiwiaW50ZXJuYWxUeXBlIjoidWludDI1NiJ9XSwib3V0cHV0cyI6W3sibmFtZSI6IiIsInR5cGUiOiJzdHJpbmciLCJpbnRlcm5hbFR5cGUiOiJzdHJpbmcifV0sInN0YXRlTXV0YWJpbGl0eSI6InZpZXcifSx7Im5hbWUiOiJ0b3RhbFN1cHBseSIsInR5cGUiOiJmdW5jdGlvbiIsImlucHV0cyI6W10sIm91dHB1dHMiOlt7Im5hbWUiOiIiLCJ0eXBlIjoidWludDMyIiwiaW50ZXJuYWxUeXBlIjoidWludDMyIn1dLCJzdGF0ZU11dGFiaWxpdHkiOiJ2aWV3In0seyJuYW1lIjoidHJhbnNmZXJGcm9tIiwidHlwZSI6ImZ1bmN0aW9uIiwiaW5wdXRzIjpbeyJuYW1lIjoiZnJvbSIsInR5cGUiOiJhZGRyZXNzIiwiaW50ZXJuYWxUeXBlIjoiYWRkcmVzcyJ9LHsibmFtZSI6InRvIiwidHlwZSI6ImFkZHJlc3MiLCJpbnRlcm5hbFR5cGUiOiJhZGRyZXNzIn0seyJuYW1lIjoidG9rZW5JZCIsInR5cGUiOiJ1aW50MjU2IiwiaW50ZXJuYWxUeXBlIjoidWludDI1NiJ9XSwib3V0cHV0cyI6W10sInN0YXRlTXV0YWJpbGl0eSI6Im5vbnBheWFibGUifSx7Im5hbWUiOiJ0cmFuc2Zlck93bmVyc2hpcCIsInR5cGUiOiJmdW5jdGlvbiIsImlucHV0cyI6W3sibmFtZSI6Im5ld093bmVyIiwidHlwZSI6ImFkZHJlc3MiLCJpbnRlcm5hbFR5cGUiOiJhZGRyZXNzIn1dLCJvdXRwdXRzIjpbXSwic3RhdGVNdXRhYmlsaXR5Ijoibm9ucGF5YWJsZSJ9LHsibmFtZSI6IndpdGhkcmF3IiwidHlwZSI6ImZ1bmN0aW9uIiwiaW5wdXRzIjpbXSwib3V0cHV0cyI6W10sInN0YXRlTXV0YWJpbGl0eSI6InBheWFibGUifV0=">
+    </meta>
+    <meta name="nft-art-contract-presale" content="W10=">
+    </meta>
+    <link rel="icon" type="image/svg" href="./Asssets/logo.png" sizes="16*16">
+    <title>MetaVerse Fox</title>
+</head>
+
+<body class="bg-gray-900">
+    <header class="text-gray-400 bg-gray-900 body-font">
+        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+
+            <img alt="Logo" class="w-12 h-13 mb-1 mr-3  object-center rounded-full" src="./Asssets/logo.png"></a>
+            <span class=" text-xl xl:block lg:hidden text-white-400">MetaVerse Fox</span>
+            <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+                <a href="https://twitter.com/metaverse_fox"> <img alt="Twitter"
+                        class="w-10 h-10 mb-1 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100 mr-4"
+                        src="./Asssets/icons8-twitter.gif "></a>
+                <a href="https://discord.gg/HZvnSW9kNt">
+                    <img alt="Discord"
+                        class="w-10 h-10 mb-1 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100 mr-4"
+                        src="./Asssets/icons8-discord-bubble-64.png ">
+                </a>
+
+                <a href="https://opensea.io/collection/metaversefox">
+                    <img alt="opensea"
+                        class="w-10 h-10 mb-1 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100 mr-4"
+                        src="./Asssets/Logomark-Blue.png ">
+                </a>
+            </nav>
+        </div>
+    </header>
+    <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>content<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+    <section class="text-gray-400 bg-gray-900 body-font">
+        <div class="container  mx-auto flex flex-col">
+            <div class="lg:w-4/6 mx-auto">
+                <div class="rounded-lg h-64 overflow-hidden">
+                    <img alt="content" class="object-cover object-center h-full w-full" src="./Asssets/banner.png">
+                </div>
+                <div class="flex flex-col sm:flex-row mt-10">
+                    <div class="sm:w-1/3 text-center sm:pr-8 sm:py-8">
+                        <div
+                            class="w-20 h-20 rounded-full inline-flex items-center justify-center object-cover text-gray-600">
+                            <img alt="Logo" class="w-20 h-20  mr-3  object-fit rounded-full"
+                                src="./Asssets/animation.gif"></a>
+                        </div>
+                        <div class="flex flex-col items-center text-center justify-center">
+                            <h2 class="font-medium title-font mt-4 text-white title-font text-lg">Mint is Live Now:</h2>
+                            <div class="w-12 h-1 bg-indigo-500 rounded mt-2 mb-4"></div>
+                            <p class="text-base text-gray-400">Welcome to the MetaFox Metaverse.<br> Mint Price: 15 Matic</p>
+                        </div>
+                    </div>
+                    <div
+                        class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-800 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
+                        <p class="leading-relaxed text-lg ">
+                            METAVERSE FOX is a collection of 5000 unique and randomly generated non-fungible tokens
+                            (NFTs)
+                            created in early February 2022
+                            ‘METAVERSE FOX’ is a first of its kind game on Polygon Blockchain, developed exclusively for
+                            FOX
+                            holders. It introduces the FOX token as a medium of exchange within the game.<br>
+                            <span class="text-center text-white-800 font-medium">Mint Here:</span>
+                            <br>
+                            <nftart-mint-button address="0xe24aCE5d681Af4422FD121dA50c303392d3197C2" chain-id="137" />
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ...........................................................Story.............................................. -->
+    <section class="text-gray-400 bg-gray-900 body-font ">
+
+        <div class="container px-5 py-24 mx-auto  text-center  w-full">
+            <h1 class="text-white font-medium title-font tracking-wider text-4xl">About Us</h1>
+            <br>
+            <div class="xl:w-4/6 lg:w-3/4 w-full mx-auto text-center flex">
+                <img class="h-64 w-64 mr-4 object-cover object-center rounded" alt="hero" src="./Asssets/gippy.gif">
+                <p class="leading-relaxed text-lg mx-auto ">METAVERSE FOX is a collection of 5000 unique and randomly
+                    generated
+                    non-fungible tokens (NFTs) created in early February 2022, Although there was no pre-release or
+                    advertising campaign, 2500 METAVERSE FOX NFT was Airdropped to “Crypto Unicorn Market” NFT holers.
+                    ‘META FOX’ is a first of its kind game on Polygon Blockchain, developed exclusively for FOX holders.
+                    It
+                    introduces the FOX token as a medium of exchange within the game.
+                    METAVERSE FOX will be able to scavenge on collectible map tiles for treasures that can be used as
+                    items
+                    in later mini-games, as well as the FOX token itself. In turn, they can use their FOX token to
+                    explore
+                    new tiles, and thereby collect them. Tiles will also contain explorable buildings with higher
+                    quality
+                    treasures that will require a
+                </p>
+
+            </div>
+            <div class="xl:w-4/6 lg:w-3/4 w-full mx-auto text-center flex">
+                <p class=" leading-relaxed text-lg mx-auto"> good combination of Foxes to conquer and exploit, but watch
+                    out
+                    for
+                    enemies that may lurk within! Holders will also be able to combine tiles across many wallets for
+                    highly
+                    efficient scavenging and to collectively explore buildings that cross multiple tiles. These map
+                    tiles
+                    will be completely configurable and will be generated from a creator UI where interested builders
+                    can
+                    make their own map NFTs to sell. </p>
+            </div>
+        </div>
+        <hr>
+    </section>
+    <!---------------------------------------------Future Direction------------------------------------------------ -->
+    <section class="text-gray-400 bg-gray-900 body-font ">
+        <div class="container px-5 py-24 mx-auto  text-center  w-full">
+            <h1 class="text-white font-medium title-font tracking-wider text-4xl underline">Future Direction
+                <br>
+                <h3 class="text-gray font-thin title-font  text-2xl italic">"To the Metaverse and Beyond" </h3>
+            </h1>
+            <br>
+            <div class="xl:w-4/6 lg:w-3/4 w-full mx-auto text-center flex">
+                <img class="h-64 w-64 mr-4 object-cover object-center rounded" alt="hero" src="./Asssets/about.jpg">
+                <p class="leading-relaxed text-lg mx-auto ">The METAVERSE FOX Brand is filled with unique and randomly
+                    generated 2D/3D NFT Social Avatars for your online experiences, which boils down to gamified
+                    collectibles with utility. They are intended to be avatars for both the two-dimensional space as
+                    well as
+                    playable avatars on our own platfrom that we are working on it. The MetaVerse Fox opens up the
+                    possibility for the community to create community games, adventures and experience with their
+                    uniquely
+                    owned META FOX VX avatars.
+                    On Feburary 2022, 5000 unique and randomly generated METAVERSE FOX emerged from the turbulent NFT
+                    jungle. Since that day, META FOX have been continuously evolving and thus forming a strong core
+                    community.
+                    With FOX token as our backbone utility token for the ecosystem there are still plenty of treasures
+                    in
+                    the jungle to uncover with the METAVERSE brand, all we can say for now is…
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- ..........................................................Road Map............................................. -->
+    <section class="text-gray-400 bg-gray-900 body-font ">
+        <div class="container px-5 py-24 mx-auto  text-center w-full justify-center">
+            <h1 class="text-gray font-medium title-font tracking-wider text-4xl underline">Road Map
+            </h1>
+            <br>
+            <h3 class="text-gray font-thin title-font  text-2xl italic">The most technologically advanced species
+                will not
+                stop
+                any time soon...
+            </h3>
+            <br>
+            <div class="container px-5 py-24  flex flex-wrap text-center w-full justify-center">
+                <div class="flex relative pt-10 pb-20 sm:items-center md:w-2/3 mx-auto">
+                    <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
+                        <div class="h-full w-1 bg-gray-800 pointer-events-none"></div>
+                    </div>
+                    <div
+                        class="flex-shrink-0 w-6 h-6 rounded-full  sm:mt-0 inline-flex items-center justify-center bg-indigo-500 text-white relative z-10 title-font font-medium text-sm">
+                        1</div>
+                    <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
+                        <div
+                            class="flex-shrink-0 w-24 h-24 bg-gray-800 text-indigo-400 rounded-full inline-flex items-center justify-center">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" class="w-12 h-12" viewBox="0 0 24 24">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </div>
+                        <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
+                            <h2 class="font-medium title-font text-white mb-1 text-xl">Level 1</h2>
+                            <p class="leading-relaxed">METAVERSE FOX VX Launch<br>
+                                The time for you to get your own METAVERSE FOX VX as a custom playable Metaverse Avatar
+                                has finally arrived on opensea.
+                                2500 NFTS were Airdropped to ”Crypto unicorn market” holders METAVERSE VX are launched
+                                in partnership with The “Crypto Unicorn Market “and the integration as playable avatars
+                                is now in development process.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex relative pb-20 sm:items-center md:w-2/3 mx-auto">
+                    <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
+                        <div class="h-full w-1 bg-gray-800 pointer-events-none"></div>
+                    </div>
+                    <div
+                        class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-indigo-500 text-white relative z-10 title-font font-medium text-sm">
+                        2</div>
+                    <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
+                        <div
+                            class="flex-shrink-0 w-24 h-24 bg-gray-800 text-indigo-400 rounded-full inline-flex items-center justify-center">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" class="w-12 h-12" viewBox="0 0 24 24">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                            </svg>
+                        </div>
+                        <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
+                            <h2 class="font-medium title-font text-white mb-1 text-xl">Level 2</h2>
+                            <p class="leading-relaxed">The FOX Token Shop<br>
+                                A mysterious merchant begins offering equipment in Fox token Shops all over FOX Island.
+                                Players will be able to buy custom METAVERSE FOX VX equipment and wearables to give
+                                their avatar additional playability and style during adventures in community-built
+                                Metaverse games.
+                                On top of that, the launch of the FOX TOKEN SHOP will bring added utility and perks for
+                                both the FOX Token as well as the 2D METAVERSE FOX.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex relative pb-20 sm:items-center md:w-2/3 mx-auto">
+                    <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
+                        <div class="h-full w-1 bg-gray-800 pointer-events-none"></div>
+                    </div>
+                    <div
+                        class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-indigo-500 text-white relative z-10 title-font font-medium text-sm">
+                        3</div>
+                    <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
+                        <div
+                            class="flex-shrink-0 w-24 h-24 bg-gray-800 text-indigo-400 rounded-full inline-flex items-center justify-center">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" class="w-12 h-12" viewBox="0 0 24 24">
+                                <circle cx="12" cy="5" r="3"></circle>
+                                <path d="M12 22V8M5 12H2a10 10 0 0020 0h-3"></path>
+                            </svg>
+                        </div>
+                        <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
+                            <h2 class="font-medium title-font text-white mb-1 text-xl">level 3</h2>
+                            <p class="leading-relaxed">FOX Island<br>
+                                A massive, multi-estate concrete jungle is built in FOX ISLAND, in which we create
+                                gaming and social experiences involving all METAVERSE FOX NFTs as well as the FOX Token.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
+                    <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
+                        <div class="h-full w-1 bg-gray-800 pointer-events-none"></div>
+                    </div>
+                    <div
+                        class="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-indigo-500 text-white relative z-10 title-font font-medium text-sm">
+                        4</div>
+                    <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
+                        <div
+                            class="flex-shrink-0 w-24 h-24 bg-gray-800 text-indigo-400 rounded-full inline-flex items-center justify-center">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" class="w-12 h-12" viewBox="0 0 24 24">
+                                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
+                            <h2 class="font-medium title-font text-white mb-1 text-xl">Level 4</h2>
+                            <p class="leading-relaxed">METAVERSE FOX Utility Expansion<br>
+                                Owning one or more METAVERSE FOX grants you access to META FOX Guilds, bridging the gap
+                                between Axie Infinity, Guild of Guardians ,Embersword & Sandbox
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
